@@ -54,7 +54,7 @@ if ($user && password_verify($data['password'], $user['password'])) {
         'message' => 'Login successful.',
         'user' => [
             'id' => $user['id'],
-            'name' => $user['name'],
+            //m8gt
             'email' => $user['email']
         ]
     ];
