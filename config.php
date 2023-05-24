@@ -1,4 +1,20 @@
 <?php
+
+// Check if the request method is not POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Invalid request method
+    $response = [
+        'error' => 'Invalid request method (405). Only POST requests are allowed.'
+    ];
+
+    // Set the appropriate headers and encode the response data as JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
+
+    // Terminate the script execution
+    die();
+}
+
 $host = 'localhost';
 $dbName = 'spare_parts_app';
 $username = 'root';
@@ -13,14 +29,14 @@ try {
 
     if ($connectionStatus === false) {
         // Connection failed
-        echo "Database connection failed.";
+        echo json_encode("Database connection failed.");
     } else {
         // Connection successful
-        echo "Database connection successful.";
+        echo json_encode("Database connection successful.");
     }
 } catch (PDOException $e) {
     // Connection error
-    echo "Database connection error: " . $e->getMessage();
+    echo json_encode("Database connection error: " . $e->getMessage());
 }
 
 
