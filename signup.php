@@ -13,7 +13,6 @@ if (isset($data['username']) && isset($data['email']) && isset($data['password']
     $email = $data['email'];
     $password = $data['password'];
     $phone_number = $data['phone_number'];
-
 } else {
     // Invalid request, missing required fields
     $response = [
@@ -52,19 +51,32 @@ if ($user) {
     // Insert the new user into the database
     $stmt = $pdo->prepare("INSERT INTO users (username, email, password, phone_number) VALUES (?, ?, ?, ?)");
     $stmt->execute([$data['username'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT), $data['phone_number']]);
-    
-    // User registration successful
-    $response = [
-        'message' => 'User registration successful.',
-        'user' => [
-            'id' => $user['id'],
-            'username' => $user['username'],
-            'email' => $user['email'],
-            'phone_number' => $user['phone_number']
-        ]
-    ];
-}
 
+    // Get last inserted ID
+    $last_id = $pdo->lastInsertId();
+
+    // Query the inserted user data
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$last_id]);
+    $user = $stmt->fetch();
+
+    if ($user) {
+        // User registration successful
+        $response = [
+            'message' => 'User registration successful.',
+            'user' => [
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'email' => $user['email'],
+                'phone_number' => $user['phone_number']
+            ]
+        ];
+    } else {
+        $response = [
+            'message' => 'An error occurred while fetching the registered user data.'
+        ];
+    }
+}
 
 // Set the appropriate headers and encode the response data as JSON
 header('Content-Type: application/json');
