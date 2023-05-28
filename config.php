@@ -1,5 +1,12 @@
 <?php
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+// Rest of your PHP code
+
+
 // Check if the request method is not POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     // Invalid request method
