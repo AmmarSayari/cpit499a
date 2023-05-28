@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die();
 }
 
-$host = 'localhost';
-$dbName = 'spare_parts_app';
-$username = 'root';
+$host = 'eu-cdbr-west-03.cleardb.net';
+$dbName = 'heroku_81ec8468be33dd3';
+$username = '8fc53019';
 $password = 'passw0rd';
 
 try {
