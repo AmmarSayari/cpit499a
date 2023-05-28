@@ -11,7 +11,11 @@ $page = $data['page'] ?? 1;
 $offset = ($page - 1) * 9;
 
 // Construct the SQL query with pagination
-$sql = "SELECT * FROM orders WHERE status = 'active' LIMIT 9 OFFSET $offset";
+$sql = "SELECT o.id, o.user_id, o.type, o.model, o.year, o.spare_part, o.price_range, o.created_at, o.status, u.phone_number
+        FROM orders AS o
+        JOIN users AS u ON o.user_id = u.id
+        WHERE o.status = 'active'
+        LIMIT 9 OFFSET $offset";
 
 // Execute the SQL query
 $stmt = $pdo->query($sql);
