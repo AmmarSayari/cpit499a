@@ -55,9 +55,16 @@ if ($user) {
     
     // User registration successful
     $response = [
-        'message' => 'User registration successful.'
+        'message' => 'User registration successful.',
+        'user' => [
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'email' => $user['email'],
+            'phone_number' => $user['phone_number']
+        ]
     ];
 }
+
 
 // Set the appropriate headers and encode the response data as JSON
 header('Content-Type: application/json');
