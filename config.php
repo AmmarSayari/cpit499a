@@ -36,10 +36,10 @@ try {
 
     if ($connectionStatus === false) {
         // Connection failed
-        echo json_encode(array("info" => "Database connection failed."));
+       // echo json_encode(array("info" => "Database connection failed."));
     } else {
         // Connection successful
-        echo json_encode(array("info" => "Database connection successful."));
+        //echo json_encode(array("info" => "Database connection successful."));
     }
 } catch (PDOException $e) {
     // Connection error
