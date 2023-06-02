@@ -39,7 +39,7 @@ $currentStatus = $stmt->fetchColumn();
 
 if ($currentStatus === $newStatus) {
     $response = [
-        'message' => 'New status is the same as the current status.'
+        'message' => 'The order is already ("' . $newStatus . '").'
     ];
 
     // Set the appropriate headers and encode the response data as JSON
